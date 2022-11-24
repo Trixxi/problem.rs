@@ -1,0 +1,19 @@
+[package]
+name = "problem"
+version = "0.0.13"
+edition = "2021"
+authors = ["Marius Kieler <marius@auxera.net>"]
+license = "MIT"
+include = ["/src", "/LICENSE.md", "/README.md"]
+repository = "https://git.kielerlabs.com/LuderX/problem.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+mongodb = {version = "2.3.0", optional = true}
+rspc = { version = "0.1.2", features = ["axum"], optional = true }
+specta = {version = "0.0.3", optional = true}
+
+[features]
+mongodb = ["dep:mongodb"]
+rspc = ["dep:rspc", "dep:specta"]
