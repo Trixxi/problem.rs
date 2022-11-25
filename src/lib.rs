@@ -47,7 +47,7 @@ impl Problem {
 #[macro_export]
 macro_rules! problem {
     ($status:ident, $detail:expr) => {
-        Err(Problem:: $status ( $detail.to_string() ))
+        Err(problem::Problem:: $status ( $detail.to_string() ))
     };
 }
 
