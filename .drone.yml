@@ -1,0 +1,45 @@
+---
+kind: pipeline
+name: check
+type: docker
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: check
+  image: rust:1.63
+  commands:
+  - cargo check
+
+trigger:
+  event:
+    - push
+    - pull_request
+
+---
+kind: pipeline
+name: release
+type: docker
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: build
+  image: rust:1.63
+  commands:
+  - cargo build --release
+
+- name: gitea_release
+  image: plugins/gitea-release
+  settings:
+    api_key: 
+      from_secret: GITEA_TOKEN
+    base_url: https://git.kielerlabs.com
+    files: target/release/*
+trigger:
+  event:
+    - tag

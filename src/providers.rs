@@ -14,12 +14,12 @@ impl From<mongodb::error::Error> for Problem {
         }
     }
 }
-
 // only when rspc is enabled
 #[cfg(feature = "rspc")]
 impl From<Problem> for rspc::Error {
     // 
     fn from(p: Problem) -> Self {
-        rspc::Error::new(p.status, p.detail.into())
+        /* todo: parse */
+        rspc::Error::new(ProblemErrorCode::BadRequest, p.detail.into())
     }
 }
