@@ -1,3 +1,7 @@
+use crate::Problem;
+use crate::ProblemErrorCode;
+
+
 // only when mongodb is enabled
 #[cfg(feature = "mongodb")]
 impl From<mongodb::error::Error> for Problem {
