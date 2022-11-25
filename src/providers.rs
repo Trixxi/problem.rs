@@ -20,6 +20,6 @@ impl From<Problem> for rspc::Error {
     // 
     fn from(p: Problem) -> Self {
         /* todo: parse */
-        rspc::Error::new(ProblemErrorCode::BadRequest, p.detail.into())
+        rspc::Error::new(rspc::ErrorCode::BadRequest, p.detail.into())
     }
 }
