@@ -26,20 +26,20 @@ impl Problem {
     pub fn example() -> Problem {
         Problem { title: "Title".to_string(), detail: "Detail".to_string(), status: ProblemErrorCode::Conflict }
     }
-    pub fn not_found( detail: String ) -> Problem {
-        Problem { title: "Not found".to_string(), detail, status: ProblemErrorCode::NotFound }
+    pub fn not_found( detail: impl Into<String> ) -> Problem {
+        Problem { title: "Not found".to_string(), detail: detail.into(), status: ProblemErrorCode::NotFound }
     }
-    pub fn bad_request( detail: String ) -> Problem {
-        Problem { title: "Bad request".to_string(), detail, status: ProblemErrorCode::NotFound }
+    pub fn bad_request( detail: impl Into<String> ) -> Problem {
+        Problem { title: "Bad request".to_string(), detail: detail.into(), status: ProblemErrorCode::NotFound }
     }
-    pub fn internal_server_error( detail: String ) -> Problem {
-        Problem { title: "Internal server error".to_string(), detail, status: ProblemErrorCode::InternalServerError }
+    pub fn internal_server_error( detail: impl Into<String> ) -> Problem {
+        Problem { title: "Internal server error".to_string(), detail: detail.into(), status: ProblemErrorCode::InternalServerError }
     }
-    pub fn forbidden( detail: String ) -> Problem {
-        Problem { title: "Forbidden".to_string(), detail, status: ProblemErrorCode::Forbidden }
+    pub fn forbidden( detail: impl Into<String> ) -> Problem {
+        Problem { title: "Forbidden".to_string(), detail: detail.into(), status: ProblemErrorCode::Forbidden }
     }
-    pub fn unauthorized( detail: String ) -> Problem {
-        Problem { title: "Unauthorized".to_string(), detail, status: ProblemErrorCode::Unauthorized }
+    pub fn unauthorized( detail: impl Into<String> ) -> Problem {
+        Problem { title: "Unauthorized".to_string(), detail: detail.into(), status: ProblemErrorCode::Unauthorized }
     }
 }
 
