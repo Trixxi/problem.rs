@@ -1,5 +1,5 @@
 pub mod providers;
-
+pub mod macros;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ProblemErrorCode {
@@ -23,9 +23,6 @@ pub struct Problem {
     pub status: ProblemErrorCode,
 }
 impl Problem {
-    pub fn example() -> Problem {
-        Problem { title: "Title".to_string(), detail: "Detail".to_string(), status: ProblemErrorCode::Conflict }
-    }
     pub fn not_found( detail: impl Into<String> ) -> Problem {
         Problem { title: "Not found".to_string(), detail: detail.into(), status: ProblemErrorCode::NotFound }
     }
@@ -43,6 +40,7 @@ impl Problem {
     }
 }
 
+
 // a macro to generate a Problem and return as Err\
 #[macro_export]
 macro_rules! problem {
@@ -57,6 +55,10 @@ mod tests {
     use super::*;
     fn return_problem() -> ProblemResult<String>{
         problem!(not_found, "Not found")
+    }
+
+    fn problem_macros() -> ProblemResult<String> {
+        not_found!("Not found {}", 123)
     }
 
     #[test]
@@ -107,4 +109,39 @@ impl From<Option<Problem>> for Problem {
             }
         }
     }
+}
+
+#[macro_export]
+macro_rules! unauthorized {
+( $( $p:tt ),* ) => {{
+    Err(Problem::unauthorized(format!($($p),*)))
+}};
+}
+
+#[macro_export]
+macro_rules! forbidden {
+( $( $p:tt ),* ) => {{
+    Err(Problem::forbidden(format!($($p),*)))
+}};
+}
+
+#[macro_export]
+macro_rules! not_found {
+( $( $p:tt ),* ) => {{
+    Err(Problem::not_found(format!($($p),*)))
+}};
+}
+
+#[macro_export]
+macro_rules! bad_request {
+( $( $p:tt ),* ) => {{
+    Err(Problem::bad_request(format!($($p),*)))
+}};
+}
+
+#[macro_export]
+macro_rules! internal_server_error {
+( $( $p:tt ),* ) => {{
+    Err(Problem::internal_server_error(format!($($p),*)))
+}};
 }

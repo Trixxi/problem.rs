@@ -1,6 +1,6 @@
 [package]
 name = "problem"
-version = "0.0.14"
+version = "0.0.15"
 edition = "2021"
 authors = ["Marius Kieler <marius@auxera.net>"]
 license = "MIT"
